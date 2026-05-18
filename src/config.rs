@@ -9,10 +9,7 @@ impl Config {
     pub fn from_env() -> Self {
         let project_root = std::env::var("KUBEVIRT_PROJECT_ROOT")
             .map(PathBuf::from)
-            .unwrap_or_else(|_| {
-                let home = std::env::var("HOME").unwrap_or_else(|_| ".".into());
-                PathBuf::from(home).join("Developer/Projects/kubevirt-ui")
-            });
+            .expect("KUBEVIRT_PROJECT_ROOT must be set to the root of the kubevirt-ui repo");
         Self { project_root }
     }
 
